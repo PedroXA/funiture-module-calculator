@@ -1,6 +1,11 @@
+import { Cards } from "./Cards/Cards";
+import { ModuleStatus } from "./ModuleStatus/ModuleStatus";
+
 export function Dashboard() {
-  return;
-  // Cards
-  // Modulos Criados
-  // Tabela
+  return (
+    <div className="pl-32">
+      <Cards />
+      <ModuleStatus />
+    </div>
+  );
 }
