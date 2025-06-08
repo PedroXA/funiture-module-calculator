@@ -35,7 +35,7 @@ export function ModuleShelfs() {
           type="text"
           name="shelfQuantity"
           id="shelfQuantity"
-          className="h-12 w-10/12 bg-[#f3f3f3]! rounded-r-md"
+          className="h-12 w-[16rem] bg-[#f3f3f3]! rounded-r-md"
         />
       </div>
     </div>

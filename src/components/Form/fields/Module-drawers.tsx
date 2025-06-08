@@ -9,7 +9,7 @@ export function ModuleDrawers() {
         <select
           name="drawers"
           id="drawers"
-          className="h-12 w-10/12 bg-[#f3f3f3]! rounded-r-md"
+          className="h-12 w-[17rem] bg-[#f3f3f3]! rounded-r-md"
         >
           <option value="semGavetas">Sem Gavetas</option>
           <option value="interna">Interna</option>
@@ -19,12 +19,12 @@ export function ModuleDrawers() {
 
       {/* Parte condicional, se tiver gavetas a parte de baixo aparece */}
       <div className="">
-        <label htmlFor="drawers-quantity">Quantidade de Gavetas</label>
+        <label htmlFor="drawers-quantity">Quantidade</label>
         <input
           type="number"
           name="drawers-quantity"
           id="drawers-quantity"
-          className="h-12 w-10/12 bg-[#f3f3f3]! rounded-r-md"
+          className="h-12 w-[8rem] bg-[#f3f3f3]! rounded-r-md"
         />
       </div>
     </div>
