@@ -3,7 +3,7 @@ import { ModuleStatus } from "./ModuleStatus/ModuleStatus";
 
 export function Dashboard() {
   return (
-    <div className="pl-32">
+    <div>
       <Cards />
       <ModuleStatus />
     </div>
