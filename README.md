@@ -9,9 +9,9 @@ The tool allows users to build one or more modules by specifying:
 - Finishing type
 
 ### Tech Stack
-React + Vite
-Tailwind CSS
-ZOD + React Hook Form
+- React + Vite
+- Tailwind CSS
+- ZOD + React Hook Form
 
 ### Project Status
 Under active development. Current focus: improving responsiveness, validating user inputs, and implementing a material and pricing calculator.
