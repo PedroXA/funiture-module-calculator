@@ -11,9 +11,9 @@ export function Form() {
   return (
     <form
       action=""
-      className="-mt-20 ml-[12rem] mr-[12rem] flex flex-col bg-white w-[32rem] h-[47rem] pl-12 pr-12 pt-8  rounded-2xl"
+      className="-mt-20 ml-[8rem] mr-[8rem] flex flex-col bg-white w-[32rem] h-[37rem] p-8 rounded-2xl"
     >
-      <h1 className="text-4xl grid col-span-3">Dados do Módulo</h1>
+      <h1 className="text-4xl">Dados do Módulo</h1>
       <ModuleType />
       <ModuleMeasures />
       <ModuleDoors />
@@ -24,14 +24,14 @@ export function Form() {
       <div className="flex gap-2">
         <button
           type="submit"
-          className="w-[13rem] h-[3rem] bg-[#6BFF8B] flex justify-center align-middle p-3.5 gap-2 rounded-2xl mt-5 font-semibold"
+          className="w-[13rem] h-[3rem] bg-[#6BFF8B] flex items-center p-3.5 gap-2 rounded-2xl mt-5 font-semibold hover:brightness-75 duration-200"
         >
           <Icons.newModule height={16} /> Adicionar Módulo
         </button>
 
         <button
           type="submit"
-          className="w-[8rem] h-[3rem] bg-[#FFCD29] flex justify-center align-middle p-3.5 gap-2 rounded-2xl mt-5 font-semibold"
+          className="w-[8rem] h-[3rem] bg-[#FFCD29] flex justify-center items-center p-3.5 gap-2 rounded-2xl mt-5 font-semibold hover:brightness-75 duration-200"
         >
           <Icons.clear height={16} /> Limpar
         </button>

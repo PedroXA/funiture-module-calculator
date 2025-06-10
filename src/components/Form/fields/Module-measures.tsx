@@ -1,41 +1,35 @@
 export function ModuleMeasures() {
   return (
-    <div className="flex flex-row">
-      <div className="basis-64">
-        <label htmlFor="">
-          Largura <span className="text-red-600 text-xs">cm²</span>
-        </label>
+    <div className="flex">
+      <label className="basis-1/3">
+        Largura <span className="text-red-600 text-xs">cm²</span>
         <input
           type="number"
           name=""
           id=""
-          className="h-12 w-[8rem] bg-[#f3f3f3]! rounded-r-md"
+          className="h-12 w-[6.5rem] p-2 bg-[#f3f3f3]! rounded-r-md"
         />
-      </div>
+      </label>
 
-      <div className="basis-64">
-        <label htmlFor="">
-          Altura <span className="text-red-600 text-xs">cm²</span>
-        </label>
+      <label className="basis-1/3">
+        Altura <span className="text-red-600 text-xs">cm²</span>
         <input
           type="number"
           name=""
           id=""
-          className="h-12 w-[8rem] bg-[#f3f3f3]! rounded-r-md"
+          className="h-12 w-[6.5rem] p-2 bg-[#f3f3f3]! rounded-r-md"
         />
-      </div>
+      </label>
 
-      <div className="basis-64">
-        <label htmlFor="" className="text-">
-          Profundidade <span className="text-red-600 text-xs">cm²</span>
-        </label>
+      <label className="basis-1/3">
+        Profundidade <span className="text-red-600 text-xs">cm²</span>
         <input
           type="number"
           name=""
           id=""
-          className="h-12 w-[8rem] bg-[#f3f3f3]! rounded-r-md"
+          className="h-12 w-[8rem] p-2 bg-[#f3f3f3]! rounded-r-md"
         />
-      </div>
+      </label>
     </div>
   );
 }

@@ -1,17 +1,17 @@
 export function ModuleType() {
   return (
-    <div className="flex flex-row pt-8 pb-4">
-      <div className="basis-128">
+    <div className="flex flex-row">
+      <div className="basis-2/3">
         <label htmlFor="module-name">Nome do Módulo</label>
         <input
           type="text"
           name="module-name"
           id="module-name"
-          className="h-12 w-[17rem] bg-[#f3f3f3]! rounded-r-md"
+          className="h-12 w-[16rem] p-2 bg-[#f3f3f3]! rounded-r-md"
         />
       </div>
 
-      <div className="basis-64">
+      <div className="basis-1/3">
         <label htmlFor="module-wood-type">Tipo da Madeira</label>
 
         {/* Linkar a data de madeiras com o select */}
