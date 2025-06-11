@@ -1,13 +1,18 @@
 // TODO: Desabilitar Quantidade quando a opção for "Sem Gavetas"
 
-export function ModuleDrawers() {
+import type { FieldValues, UseFormRegister } from "react-hook-form";
+
+type Props = {
+  register: UseFormRegister<FieldValues>;
+};
+
+export function ModuleDrawers({ register }: Props) {
   return (
     <div className="flex flex-row">
       <label className="basis-2/3">
-        Tipo da Gaveta{" "}
-        <span className="text-gray-400 text-[0.75rem]">(Opcional)</span>
+        Tipo da Gaveta
         <select
-          name="drawers"
+          {...register("moduleDrawerType")}
           id="drawers"
           className="h-12 w-[16rem] bg-[#f3f3f3]! rounded-r-md"
         >
@@ -21,8 +26,8 @@ export function ModuleDrawers() {
         Quantidade
         <input
           type="number"
-          name="drawers-quantity"
-          id="drawers-quantity"
+          {...register("moduleDrawerQuantity")}
+          id="drawersQuantity"
           className="h-12 w-[8rem] p-2 bg-[#f3f3f3]! rounded-r-md"
         />
       </label>

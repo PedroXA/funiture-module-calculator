@@ -1,12 +1,18 @@
-export function ModuleType() {
+import type { FieldValues, UseFormRegister } from "react-hook-form";
+
+type Props = {
+  register: UseFormRegister<FieldValues>;
+};
+
+export function ModuleType({ register }: Props) {
   return (
     <div className="flex flex-row">
       <div className="basis-2/3">
-        <label htmlFor="module-name">Nome do Módulo</label>
+        <label htmlFor="moduleName">Nome do Módulo</label>
         <input
           type="text"
-          name="module-name"
-          id="module-name"
+          {...register("moduleName")}
+          id="moduleName"
           className="h-12 w-[16rem] p-2 bg-[#f3f3f3]! rounded-r-md"
         />
       </div>
@@ -14,16 +20,16 @@ export function ModuleType() {
       <div className="basis-1/3">
         <label htmlFor="module-wood-type">Tipo da Madeira</label>
 
-        {/* Linkar a data de madeiras com o select */}
+        {/* TO-DO: Linkar a database de madeiras com o select */}
         <select
-          name="wood-type"
-          id="woods"
+          {...register("woodType")}
+          id="woodType"
           className="h-12 w-[8rem] bg-[#f3f3f3]! rounded-r-md"
         >
           <option value="">Selecione um tipo de Madeira</option>
-          <option value="">Opcao 1</option>
-          <option value="">Opcao 2</option>
-          <option value="">Opcao 3</option>
+          <option value="option1">Opcao 1</option>
+          <option value="option2">Opcao 2</option>
+          <option value="option3">Opcao 3</option>
         </select>
       </div>
     </div>

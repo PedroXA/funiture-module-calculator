@@ -1,15 +1,18 @@
 // O comportamento vai de acordo com a seleção do radio button
 
-export function ModuleShelfs() {
+import type { FieldValues, UseFormRegister } from "react-hook-form";
+
+type Props = {
+  register: UseFormRegister<FieldValues>;
+};
+
+export function ModuleShelfs({ register }: Props) {
   return (
     <div className="flex flex-col">
-      <p>
-        Quantidade de Prateleiras{" "}
-        <span className="text-gray-400 text-[0.75rem]">(Opcional)</span>
-      </p>
+      <p>Quantidade de Prateleiras</p>
       <input
         type="text"
-        name="shelfQuantity"
+        {...register("moduleShelfQuantity")}
         id="shelfQuantity"
         className="h-12 w-[8rem] p-2  bg-[#f3f3f3]! rounded-r-md"
         placeholder="0"
