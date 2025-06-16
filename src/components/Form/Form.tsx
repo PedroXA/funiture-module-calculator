@@ -1,3 +1,6 @@
+// TO-DO
+// Change: Campos largura, altura e profundidade nao estao no formato da arquitetura de nomes do projeto
+
 import Icons from "../../utils/Icons";
 
 import { useForm, type FieldValues } from "react-hook-form";
@@ -10,14 +13,18 @@ export function Form() {
   const createModuleFormSchema = z.object({
     moduleName: z.string().nonempty("O módulo precisa ter um nome."),
     moduleWoodType: z.string().nonempty("Selecione um tipo de Madeira"),
-    largura: z.number().int(),
-    altura: z.number().int(),
-    profundidade: z.number().int(),
+    largura: z
+      .number({
+        message: "Campo vazio",
+      })
+      .int(),
+    altura: z.coerce.number().int(),
+    profundidade: z.coerce.number().int(),
     moduleDoorType: z.string(),
-    moduleDoorQuantity: z.number().int(),
+    moduleDoorQuantity: z.coerce.number().int(),
     moduleDrawerType: z.string().nonempty(),
-    moduleDrawerQuantity: z.number().int(),
-    moduleShelfQuantity: z.number().int(),
+    moduleDrawerQuantity: z.coerce.number().int(),
+    moduleShelfQuantity: z.coerce.number().int(),
     moduleComplement: z.string(),
   });
 
@@ -38,7 +45,7 @@ export function Form() {
     <form
       onSubmit={handleSubmit(createModule)}
       action=""
-      className="-mt-20 ml-[8rem] mr-[8rem] flex flex-col bg-white w-[32rem] h-[37rem] p-8 rounded-2xl"
+      className="-mt-20 ml-[8rem] mr-[8rem] flex flex-col bg-white w-[32rem] h-fit p-8 rounded-2xl"
     >
       <h1 className="text-4xl">Dados do Módulo</h1>
       <div className="flex flex-row">
@@ -46,10 +53,13 @@ export function Form() {
           <label htmlFor="moduleName">Nome do Módulo</label>
           <input
             type="text"
-            // {...register("moduleName")}
+            {...register("moduleName")}
             id="moduleName"
             className="h-12 w-[16rem] p-2 bg-[#f3f3f3]! rounded-r-md"
           />
+          {errors.moduleName && (
+            <span className="flex">{errors.moduleName.message}</span>
+          )}
         </div>
 
         <div className="basis-1/3">
@@ -57,7 +67,7 @@ export function Form() {
 
           {/* TO-DO: Linkar a database de madeiras com o select */}
           <select
-            // {...register("woodType")}
+            {...register("moduleWoodType")}
             id="woodType"
             className="h-12 w-[8rem] bg-[#f3f3f3]! rounded-r-md"
           >
@@ -66,6 +76,9 @@ export function Form() {
             <option value="option2">Opcao 2</option>
             <option value="option3">Opcao 3</option>
           </select>
+          {errors.moduleWoodType && (
+            <span className="flex">{errors.moduleWoodType.message}</span>
+          )}
         </div>
       </div>
 
@@ -74,30 +87,39 @@ export function Form() {
           Largura <span className="text-red-600 text-xs">cm²</span>
           <input
             type="number"
-            // {...register("largura")}
+            {...register("largura")}
             id="largura"
             className="h-12 w-[6.5rem] p-2 bg-[#f3f3f3]! rounded-r-md"
           />
+          {errors.largura && (
+            <span className="flex">{errors.largura.message}</span>
+          )}
         </label>
 
         <label className="basis-1/3">
           Altura <span className="text-red-600 text-xs">cm²</span>
           <input
             type="number"
-            // {...register("altura")}
+            {...register("altura")}
             id="altura"
             className="h-12 w-[6.5rem] p-2 bg-[#f3f3f3]! rounded-r-md"
           />
+          {errors.altura && (
+            <span className="flex">{errors.altura.message}</span>
+          )}
         </label>
 
         <label className="basis-1/3">
           Profundidade <span className="text-red-600 text-xs">cm²</span>
           <input
             type="number"
-            // {...register("profundidade")}
+            {...register("profundidade")}
             id="profundidade"
             className="h-12 w-[8rem] p-2 bg-[#f3f3f3]! rounded-r-md"
           />
+          {errors.profundidade && (
+            <span className="flex">{errors.profundidade.message}</span>
+          )}
         </label>
       </div>
 
@@ -116,6 +138,9 @@ export function Form() {
             <option value="basculante">Basculante - R$ 30 Un</option>
           </select>
         </label>
+        {errors.moduleDoorType && (
+          <span className="flex">{errors.moduleDoorType.message}</span>
+        )}
 
         <label className="basis-1/3">
           Quantidade
@@ -125,6 +150,9 @@ export function Form() {
             id="doorQuantity"
             className="h-12 w-[8rem] p-2 bg-[#f3f3f3]! rounded-r-md"
           />
+          {errors.moduleDoorQuantity && (
+            <span className="flex">{errors.moduleDoorQuantity.message}</span>
+          )}
         </label>
       </div>
 
