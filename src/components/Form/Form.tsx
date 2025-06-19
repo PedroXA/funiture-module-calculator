@@ -1,23 +1,22 @@
 // TO-DO
 // Change: Campos largura, altura e profundidade nao estao no formato da arquitetura de nomes do projeto
+// A quantidade de portas deve aparecer quando o tipo da porta for diferente de Sem portas
+// A quantidade de gavetas deve aparecer quando o tipo da gaveta for diferente de Sem gavetas
 
 import Icons from "../../utils/Icons";
 
 import { useForm, type FieldValues } from "react-hook-form";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 export function Form() {
   // Module Schema
   const createModuleFormSchema = z.object({
+    moduleId: z.string(),
     moduleName: z.string().nonempty("O módulo precisa ter um nome."),
     moduleWoodType: z.string().nonempty("Selecione um tipo de Madeira"),
-    largura: z
-      .number({
-        message: "Campo vazio",
-      })
-      .int(),
+    largura: z.coerce.number().int(),
     altura: z.coerce.number().int(),
     profundidade: z.coerce.number().int(),
     moduleDoorType: z.string(),
@@ -25,21 +24,52 @@ export function Form() {
     moduleDrawerType: z.string().nonempty(),
     moduleDrawerQuantity: z.coerce.number().int(),
     moduleShelfQuantity: z.coerce.number().int(),
-    moduleComplement: z.string(),
+    moduleComplement: z.string().nonempty(),
   });
 
+  type CreateModuleFormData = z.infer<typeof createModuleFormSchema>;
+
   const [output, setOutput] = useState("");
+
+  function createModule(data: CreateModuleFormData) {
+    setOutput(JSON.stringify(data, null, 2));
+
+    // Aqui no futuro: salvar no localStorage, etc.
+    // saveModule(data)
+
+    // Gera novo ID e reseta o form com ele
+    reset({
+      moduleId: generateModuleId(), // 👈 ID renovado aqui!
+      moduleDoorQuantity: 0,
+      moduleDrawerQuantity: 0,
+      moduleShelfQuantity: 0,
+      // moduleWoodType:
+      moduleDoorType: "Selecione o Tipo de Porta",
+    });
+  }
+
+  const generateModuleId = () => {
+    return `mod-${Date.now()}-${Math.random().toString(36).substring(2, 8)}`;
+  };
+
+  const [moduleId] = useState(generateModuleId);
+
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
-  } = useForm({
+  } = useForm<CreateModuleFormData>({
     resolver: zodResolver(createModuleFormSchema),
+    defaultValues: {
+      moduleId: generateModuleId(),
+      moduleDoorQuantity: 0,
+      moduleDrawerQuantity: 0,
+      moduleShelfQuantity: 0,
+      // moduleWoodType:
+      moduleDoorType: "Selecione o Tipo de Porta",
+    },
   });
-
-  function createModule(data: any) {
-    setOutput(JSON.stringify(data, null, 2));
-  }
 
   return (
     <form
@@ -50,6 +80,12 @@ export function Form() {
       <h1 className="text-4xl">Dados do Módulo</h1>
       <div className="flex flex-row">
         <div className="basis-2/3">
+          <input
+            type="hidden"
+            id="moduleId"
+            value={moduleId}
+            {...register("moduleId")}
+          />
           <label htmlFor="moduleName">Nome do Módulo</label>
           <input
             type="text"
@@ -131,16 +167,16 @@ export function Form() {
             id="doorType"
             className="h-12 w-[16rem] bg-[#f3f3f3]! rounded-r-md"
           >
-            <option value="">Seletione o tipo de Porta</option>
+            <option value="">Selecione o Tipo de Porta</option>
             <option value="Sem portas">Sem Portas</option>
             <option value="correr">Correr - R$ 70 Un</option>
             {/* Basculante - Pistão */}
             <option value="basculante">Basculante - R$ 30 Un</option>
           </select>
+          {errors.moduleDoorType && (
+            <span className="flex">{errors.moduleDoorType.message}</span>
+          )}
         </label>
-        {errors.moduleDoorType && (
-          <span className="flex">{errors.moduleDoorType.message}</span>
-        )}
 
         <label className="basis-1/3">
           Quantidade
@@ -187,7 +223,7 @@ export function Form() {
           type="text"
           {...register("moduleShelfQuantity")}
           id="shelfQuantity"
-          className="h-12 w-[8rem] p-2  bg-[#f3f3f3]! rounded-r-md"
+          className="h-12 w-[8rem] p-2 bg-[#f3f3f3]! rounded-r-md"
           placeholder="0"
         />
       </div>
@@ -201,7 +237,7 @@ export function Form() {
           id="complement"
           className="h-12 w-[16rem] bg-[#f3f3f3]! rounded-r-md"
         >
-          <option value="semAcabamento">Selecione o Acabamento</option>
+          <option value="">Selecione o Acabamento</option>
           <option value="option1">Opcao 1</option>
           <option value="option2">Opcao 2</option>
           <option value="option3">Opcao 3</option>
@@ -217,7 +253,7 @@ export function Form() {
         </button>
 
         <button
-          type="submit"
+          type="reset"
           className="w-[8rem] h-[3rem] bg-[#FFCD29] flex justify-center items-center p-3.5 gap-2 rounded-2xl mt-5 font-semibold hover:brightness-75 duration-200"
         >
           <Icons.clear height={16} /> Limpar
@@ -227,4 +263,20 @@ export function Form() {
       <pre>{output}</pre>
     </form>
   );
+}
+function saveModule(data: {
+  moduleId: string;
+  moduleName: string;
+  moduleWoodType: string;
+  largura: number;
+  altura: number;
+  profundidade: number;
+  moduleDoorType: string;
+  moduleDoorQuantity: number;
+  moduleDrawerType: string;
+  moduleDrawerQuantity: number;
+  moduleShelfQuantity: number;
+  moduleComplement: string;
+}) {
+  throw new Error("Function not implemented.");
 }
