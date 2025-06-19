@@ -1,15 +1,9 @@
-import { Dashboard } from "./components/Dashboard/Dashboard";
-import { Form } from "./components/Form/Form";
-import { Header } from "./components/Header/Header";
+import { IndexPage } from "./pages";
 
 function App() {
   return (
     <>
-      <Header />
-      <div className="flex">
-        <Form />
-        <Dashboard />
-      </div>
+      <IndexPage />
     </>
   );
 }
