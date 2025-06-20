@@ -4,7 +4,6 @@
 // A quantidade de gavetas deve aparecer quando o tipo da gaveta for diferente de Sem gavetas
 
 import Icons from "../../utils/Icons";
-
 import { useForm, type FieldValues } from "react-hook-form";
 import { useRef, useState } from "react";
 import { z } from "zod";
