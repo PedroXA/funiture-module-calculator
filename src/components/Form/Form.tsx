@@ -9,24 +9,9 @@ import { useForm, type FieldValues } from "react-hook-form";
 import { useRef, useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import type { createModuleFormSchema } from "../../types/calculator";
 
 export function Form() {
-  // Module Schema
-  const createModuleFormSchema = z.object({
-    moduleId: z.string(),
-    moduleName: z.string().nonempty("O módulo precisa ter um nome."),
-    moduleWoodType: z.string().nonempty("Selecione um tipo de Madeira"),
-    largura: z.coerce.number().int(),
-    altura: z.coerce.number().int(),
-    profundidade: z.coerce.number().int(),
-    moduleDoorType: z.string(),
-    moduleDoorQuantity: z.coerce.number().int(),
-    moduleDrawerType: z.string().nonempty(),
-    moduleDrawerQuantity: z.coerce.number().int(),
-    moduleShelfQuantity: z.coerce.number().int(),
-    moduleComplement: z.string().nonempty(),
-  });
-
   type CreateModuleFormData = z.infer<typeof createModuleFormSchema>;
 
   const [output, setOutput] = useState("");
@@ -43,8 +28,6 @@ export function Form() {
       moduleDoorQuantity: 0,
       moduleDrawerQuantity: 0,
       moduleShelfQuantity: 0,
-      // moduleWoodType:
-      moduleDoorType: "Selecione o Tipo de Porta",
     });
   }
 
@@ -54,6 +37,21 @@ export function Form() {
 
   const [moduleId] = useState(generateModuleId);
 
+  const getDefaultValues = (): CreateModuleFormData => ({
+    moduleId: generateModuleId(),
+    moduleName: "",
+    moduleWoodType: "",
+    largura: 0,
+    altura: 0,
+    profundidade: 0,
+    moduleDoorType: "Selecione o Tipo de Porta",
+    moduleDoorQuantity: 0,
+    moduleDrawerType: "semGavetas",
+    moduleDrawerQuantity: 0,
+    moduleShelfQuantity: 0,
+    moduleComplement: "semAcabamento",
+  });
+
   const {
     register,
     handleSubmit,
@@ -61,14 +59,7 @@ export function Form() {
     formState: { errors },
   } = useForm<CreateModuleFormData>({
     resolver: zodResolver(createModuleFormSchema),
-    defaultValues: {
-      moduleId: generateModuleId(),
-      moduleDoorQuantity: 0,
-      moduleDrawerQuantity: 0,
-      moduleShelfQuantity: 0,
-      // moduleWoodType:
-      moduleDoorType: "Selecione o Tipo de Porta",
-    },
+    defaultValues: getDefaultValues(),
   });
 
   return (
@@ -107,7 +98,9 @@ export function Form() {
             id="woodType"
             className="h-12 w-[8rem] bg-[#f3f3f3]! rounded-r-md"
           >
-            <option value="">Selecione um tipo de Madeira</option>
+            <option value="" defaultChecked>
+              Selecione um tipo de Madeira
+            </option>
             <option value="option1">Opcao 1</option>
             <option value="option2">Opcao 2</option>
             <option value="option3">Opcao 3</option>
@@ -167,7 +160,9 @@ export function Form() {
             id="doorType"
             className="h-12 w-[16rem] bg-[#f3f3f3]! rounded-r-md"
           >
-            <option value="">Selecione o Tipo de Porta</option>
+            <option value="" defaultChecked>
+              Selecione o Tipo de Porta
+            </option>
             <option value="Sem portas">Sem Portas</option>
             <option value="correr">Correr - R$ 70 Un</option>
             {/* Basculante - Pistão */}
@@ -200,7 +195,9 @@ export function Form() {
             id="drawers"
             className="h-12 w-[16rem] bg-[#f3f3f3]! rounded-r-md"
           >
-            <option value="semGavetas">Sem Gavetas</option>
+            <option value="semGavetas" defaultChecked>
+              Sem Gavetas
+            </option>
             <option value="interna">Interna</option>
             <option value="externa">Externa</option>
           </select>
@@ -237,7 +234,9 @@ export function Form() {
           id="complement"
           className="h-12 w-[16rem] bg-[#f3f3f3]! rounded-r-md"
         >
-          <option value="">Selecione o Acabamento</option>
+          <option value="" defaultChecked>
+            Selecione o Acabamento
+          </option>
           <option value="option1">Opcao 1</option>
           <option value="option2">Opcao 2</option>
           <option value="option3">Opcao 3</option>
@@ -259,24 +258,23 @@ export function Form() {
           <Icons.clear height={16} /> Limpar
         </button>
       </div>
-
-      <pre>{output}</pre>
     </form>
   );
 }
-function saveModule(data: {
-  moduleId: string;
-  moduleName: string;
-  moduleWoodType: string;
-  largura: number;
-  altura: number;
-  profundidade: number;
-  moduleDoorType: string;
-  moduleDoorQuantity: number;
-  moduleDrawerType: string;
-  moduleDrawerQuantity: number;
-  moduleShelfQuantity: number;
-  moduleComplement: string;
-}) {
-  throw new Error("Function not implemented.");
-}
+
+// function saveModule(data: {
+//   moduleId: string;
+//   moduleName: string;
+//   moduleWoodType: string;
+//   largura: number;
+//   altura: number;
+//   profundidade: number;
+//   moduleDoorType: string;
+//   moduleDoorQuantity: number;
+//   moduleDrawerType: string;
+//   moduleDrawerQuantity: number;
+//   moduleShelfQuantity: number;
+//   moduleComplement: string;
+// }) {
+//   throw new Error("Function not implemented.");
+// }
