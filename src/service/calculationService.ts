@@ -4,8 +4,21 @@
 // [] - MOSTRAR O VALOR DO MODULO JÁ PRONTO PARA VENDA (VALOR FINAL)
 
 
-// Calculate the area of wood needed in square meters
-const areaNeeded = ((module.width * module.height * 2) + (module.width * module.depth * 2) + (module.height * module.depth * 2)) / 10000; // cm² to m²
-const woodCost = areaNeeded * module.woodType.price;
+export const moduleProfit = () => {
+    const largura_m = largura_formulário / 100;
+    const altura_m = altura_formulário / 100
+    const profundidade_m = profundidade_formulário / 100
 
-totalPrice += woodCost;
+    // Calculando as áreas principais (em m²):
+    const laterais = 2 * (altura_m * profundidade_m)
+    const fundo = altura_m * largura_m
+    const topo_base = 2 * (largura_m * profundidade_m)
+    const porta = altura_m * largura_m  // Se houver porta
+
+    // Soma total de área de madeira usada
+    const area_total = laterais + fundo + topo_base + porta
+
+    // Preço final
+    const preco = area_total * 250
+
+}
