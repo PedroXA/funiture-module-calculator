@@ -8,15 +8,18 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createModuleFormSchema } from "../../types/calculator";
+import { createModuleFormSchema } from "../../schemas/calculator";
+import { moduleProfit } from "../../service/calculationService";
+import { number } from "zod/v4-mini";
 
 export function Form() {
   type CreateModuleFormData = z.infer<typeof createModuleFormSchema>;
 
-  const [output, setOutput] = useState("");
+  // const [output, setOutput] = useState("");
 
   function createModule(data: CreateModuleFormData) {
-    setOutput(JSON.stringify(data, null, 2));
+    console.log(moduleProfit(data));
+    // setOutput(JSON.stringify(data, null, 2));
 
     // Aqui no futuro: salvar no localStorage, etc.
     // saveModule(data)
@@ -187,7 +190,6 @@ export function Form() {
               </option>
               <option value="Sem portas">Sem Portas</option>
               <option value="correr">Correr - R$ 70 Un</option>
-              {/* Basculante - Pistão */}
               <option value="basculante">Basculante - R$ 30 Un</option>
             </select>
             {errors.moduleDoorType && (
@@ -284,31 +286,9 @@ export function Form() {
             <Icons.clear height={16} /> Limpar
           </button>
         </div>
-        <pre>{output}</pre>
+        {/* <pre>{output}</pre> */}
       </form>
-      {console.log(
-        "hasDoorType:",
-        has_a_door_type(),
-        "doorQuantity:",
-        doorQuantity
-      )}
+      {console.log("DoorType:", doorType, "doorQuantity:", doorQuantity)}
     </>
   );
 }
-
-// function saveModule(data: {
-//   moduleId: string;
-//   moduleName: string;
-//   moduleWoodType: string;
-//   largura: number;
-//   altura: number;
-//   profundidade: number;
-//   moduleDoorType: string;
-//   moduleDoorQuantity: number;
-//   moduleDrawerType: string;
-//   moduleDrawerQuantity: number;
-//   moduleShelfQuantity: number;
-//   moduleComplement: string;
-// }) {
-//   throw new Error("Function not implemented.");
-// }
